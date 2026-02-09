@@ -48,3 +48,62 @@ destinos(X) :-
 %Destino disponible desde bogota: cartagena
 %Destino disponible desde bogota: pasto
 %true
+
+%==================================================================
+
+perro(firulais).
+perro(bruno).
+perro(max).
+gato(misu).
+gato(luna).
+gato(chanel).
+gato(orion).
+ave(piolin).
+
+dueno(ana, firulais).
+dueno(ana, misu).
+dueno(luis, luna).
+dueno(luis, orion).
+dueno(luis, firulais).
+dueno(maria, piolin).
+dueno(julia, chanel).
+dueno(pedro, bruno).
+
+%
+%Responde:
+%Define una regla que determine si una persona tiene un perro.
+tienePerro(X):-
+    dueno(X,Y),
+    perro(Y).
+%Ahora, encuentra los dueños de perros.
+% X=ana,luis,pedro
+%Define una regla que determine si una persona tiene un gato.
+tieneGato(X):-
+    dueno(X,Y),
+    gato(Y).
+%Ahora, encuentra los dueños de gatos.
+% X=ana,luis,julia
+%Define una regla que determine si una persona tiene multiples mascotas.
+tieneMultiplesMascotas(X):-
+    dueno(X,Y),
+    dueno(X,Z),
+    Y \= Z.
+%Ahora, encuentra los dueños de multiple tipos de mascota.
+% X=ana,luis.
+%Define una regla amante_animales para identificar dueños que tienen tanto perro como gato.
+amante_animales(X):-
+    dueno(X,Y),
+    dueno(X,Z),
+    perro(Y),
+    gato(Z).
+%Define una regla mascota_compartida que indique si dos personas comparten mascota.
+mascota_compartida(X,Y):-
+    dueno(X,Z),
+    dueno(Y,Z),
+    X \= Y.
+%Define una regla tipo_mascota que asocie una persona con el tipo de mascota que tiene (perro, gato, ave, etc.).
+tipo_mascota(X, perro):- dueno(X, Y), perro(Y).
+tipo_mascota(X, gato) :- dueno(X, Y), gato(Y).
+tipo_mascota(X, ave) :- dueno(X, Y), ave(Y).
+
+
